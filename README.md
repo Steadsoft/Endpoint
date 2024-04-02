@@ -19,4 +19,6 @@ ccr1(0x34):    ccr(31,32)uint;
 ```
 This simple grammar (which is a regular expression grammar) can represent any kind of register and makes it very easy to add register definitions without needing to write any of the intricate boolean expressions for AND and OR and so on. The auto generated struct also includes safety checks that prevent calling code from accidentally setting reserved bits and so on.
 
+The gebnerator logic is part of the class library and will in due course, be managed by a Visual Studio based generator.
+
 
