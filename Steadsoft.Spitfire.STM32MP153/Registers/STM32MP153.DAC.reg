@@ -1,0 +1,3 @@
+cr(0x00):en1(0,1)bool; ten1(1,1)bool; tsel1(5,4)TSELMode; wave1(7,2)WMode; mamp1(11,4)MAMPMode; dmaen1(12,1)bool; dmaudrie1(13,1)bool; cen1(14,1)bool; hfsel(15,1)bool; en2(16,1)bool; ten2(17,1)bool; tsel2(21,4)TSELMode; wave2(23,2)WMode; mamp2(27,4)MAMPMode; dmaen2(28,1)bool; dmaudrie2(29,1)bool; cen2(30,1)bool;
+dhr12r1(0x08):dacc1dhr(11,12)uint; 
+dhr8r1(0x10):dacc1dhr(7,8)uint;

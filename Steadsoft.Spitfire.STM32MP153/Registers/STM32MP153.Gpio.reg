@@ -1,0 +1,10 @@
+moder(0x00):   this(16,2)Mode;
+otyper(0x04):  this(16,1)bool;
+ospeedr(0x08): this(16,2)Speed;
+pupdr(0x0c):   this(16,2)Pull;
+odr(0x14):     this(16,1)bool;
+bsrr(0x18):    this(32,1)bool;
+lckr(0x1c):    this(16,1)bool;
+afrl(0x20):    this(8,4)AlternateFunction;
+afrh(0x24):    this(8,4)AlternateFunction;
+brr(0x28):     this(16,1)bool;

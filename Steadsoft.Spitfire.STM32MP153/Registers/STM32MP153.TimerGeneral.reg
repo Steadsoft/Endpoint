@@ -1,0 +1,10 @@
+cr1(0x00):     cen(0,1)bool; udis(1,1)bool; urs(2,1)bool; opm(3,1)bool; dir(4,1)bool; cms(6,2)CenterMode; arpe(7,1)bool; ckd(9,2)uint; uifremap(11,1)bool;
+cr2(0x4):      ccds(3,1)bool; mms(6,3)MasterMode; ti1s(7,1)bool;
+sr(0x10):      uif(0,1)bool; cc1if(1,1)bool; cc2if(2,1)bool; cc3if(3,1)bool; cc4if(4,1)bool; tif(6,1)bool; cc1of(9,1)bool; cc2of(10,1)bool; cc3of(11,1)bool; cc4of(12,1)bool;
+ccmr1(0x18):   cc1s(1,2)CC1SMode; oc1fe(2,1)bool; oc1pe(3,1)bool; oc1m(16,1, 6,3)OCMode; oc1ce(7,1)bool; cc2s(9,2)CC2SMode; oc2fe(10,1)bool; oc2pe(11,1)bool; oc2m(24,1,14,3)OCMode; oc2ce(15,1)bool;
+cnt_nre(0x24): this(32,1)bool;
+cnt_rem(0x24): this(31,1)bool; uifcpy(31,1)bool;
+arr(0x2C):     this(31,1)bool;
+psc(0x28):     value(15,16)uint;
+ccer(0x20):    cc1e(0,1)bool; cc1p(1,1)bool; cc1np(3,1)bool; cc2e(4,1)bool; cc2p(5,1)bool; cc2np(7,1)bool; cc3e(8,1)bool; cc3p(9,1)bool; cc3np(11,1)bool; cc4e(12,1)bool; cc4p(13,1)bool; cc4np(15,1) bool;
+ccr1(0x34):    ccr(31,32)uint;

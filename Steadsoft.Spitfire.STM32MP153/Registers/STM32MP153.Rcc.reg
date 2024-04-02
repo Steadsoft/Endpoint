@@ -1,0 +1,5 @@
+mp_apb1ensetr(0x0a00): this(32,1)bool;tim2en(0,1)bool; tim3en(1,1)bool; tim4en(2,1)bool; tim5en(3,1)bool;tim6en(4,1)bool; tim7en(5,1)bool; tim12en(6,1)bool; tim13en(7,1)bool; tim14en(8,1)bool; dac12en(29,1)bool;
+
+// In a 'this' the first integer is the number of elements in the array-like field.
+
+mp_ahb4ensetr(0x0a27): this.GpioPort(11,1)bool;
