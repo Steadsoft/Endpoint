@@ -3,7 +3,7 @@ Work associated with C# on STM32MP boards
 
 This repository explores the use of C# to manipulate peripheral registers on [GHI's Endpoint 'Domino'](https://www.ghielectronics.com/endpoint/) board. The approach used is to encapsulate registers with a struct and refer to that using the C# `ref` feature. Each register is represented by a contained struct that contains a single field and a peripheral class contains a member for each distinct register. The register structs are defined within a `partial` struct for the peripheral and the peripheral class has an auto generated part.
 
-The auto generated part defines a property for each register sub field making the abstraction very close to the technical documentation for the registers. The auto generated struct is created from a textual defintion of the register and its sub fields, here's an example used to create the TimerGeneral partial class file (in the 'Generated' sub folder):
+The auto generated part defines a property for each register sub field making the abstraction very close to the technical documentation for the registers. The auto generated struct is created from a textual defintion of the register and its sub fields, here's an example used to create the `TimerGeneral` partial class file (in the 'Generated' sub folder):
 
 ```
 cr1(0x00):     cen(0,1)bool; udis(1,1)bool; urs(2,1)bool; opm(3,1)bool; dir(4,1)bool; cms(6,2)CenterMode; arpe(7,1)bool; ckd(9,2)uint; uifremap(11,1)bool;
