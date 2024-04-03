@@ -3,7 +3,7 @@ Work associated with C# on STM32MP boards
 
 This repository explores the use of C# to manipulate peripheral registers on [GHI's Endpoint 'Domino'](https://www.ghielectronics.com/endpoint/) board. The approach used is to encapsulate registers with a struct and refer to that using the C# `ref` feature. Each register is represented by a contained struct that contains a single field and a peripheral class contains a member for each distinct register. The register structs are defined within a `partial` struct for the peripheral and the peripheral class has an auto generated part.
 
-The auto generated part defines a property for each register sub field making the abstraction very close to the technical documentation for the registers. The auto generated struct is created from a textual defintion of the register and its sub fields, here's an example used to create the TimerGeneral partial class file (in the 'Generated' sub folder):
+The auto generated part defines a property for each register sub field making the abstraction very close to the technical documentation for the registers. The auto generated struct is created from a textual defintion of the register and its sub fields, here's an example used to create the `TimerGeneral` partial class file (in the 'Generated' sub folder):
 
 ```
 cr1(0x00):     cen(0,1)bool; udis(1,1)bool; urs(2,1)bool; opm(3,1)bool; dir(4,1)bool; cms(6,2)CenterMode; arpe(7,1)bool; ckd(9,2)uint; uifremap(11,1)bool;
@@ -19,6 +19,34 @@ ccr1(0x34):    ccr(31,32)uint;
 ```
 This simple grammar (which is a regular expression grammar) can represent any kind of register and makes it very easy to add register definitions without needing to write any of the intricate boolean expressions for AND and OR and so on. The auto generated struct also includes safety checks that prevent calling code from accidentally setting reserved bits and so on.
 
-The gebnerator logic is part of the class library and will in due course, be managed by a Visual Studio based generator.
+Each `regdef` begins with the register name with it's offset from the peripheral base address. There then follow a sequence of field definitions that start with field name, then a start bit position and length (in bits) followed by the typename used to represent values for the field. These tyope names are expected to be user defined `enum` defintions. 
+
+The generator tool converts all register and field names into uppercase, this makes it easy to edit and type these definitions without having to use uppercase in the defintion. The regular expression defintion for the regdef syntax is defined in [`Constants.cs`](https://github.com/Steadsoft/Endpoint/blob/main/Steadsoft.Spitfire.STM32MP153/Statics/Constants.cs) like this
+
+```cs
+
+        // language=regex
+        public const string identifier = @"(([a-zA-Z][a-zA-Z\d]*))";
+        // language=regex
+        public const string hexnumber = @"0x[0-9A-Fa-f]+";
+        // language=regex
+        public const string s = @"\s*";
+        // language=regex
+        public const string lpar = @"\(";
+        // language=regex
+        public const string rpar = @"\)";
+        // language=regex
+        public const string colon = @":";
+        // language=regex
+        public const string commalist = @"\d+(\s*,\s*\d+)+";
+        // language=regex
+        public const string semicolon = @";";
+        // language=regex
+        public const string dot = @"\.";
+        // language=regex
+        public const string Syntax = $@"{identifier}{s}{lpar}{s}{hexnumber}{s}{rpar}{s}{colon}{s}({identifier}({dot}{identifier})?{s}{lpar}{s}{commalist}{s}{rpar}{s}{identifier}{s}{semicolon}{s})+";
+```
+
+The generator logic is part of the class library and will in due course, be managed by a Visual Studio based generator.
 
 
