@@ -19,6 +19,34 @@ ccr1(0x34):    ccr(31,32)uint;
 ```
 This simple grammar (which is a regular expression grammar) can represent any kind of register and makes it very easy to add register definitions without needing to write any of the intricate boolean expressions for AND and OR and so on. The auto generated struct also includes safety checks that prevent calling code from accidentally setting reserved bits and so on.
 
+Each `regdef` begins with the register name with it's offset from the peripheral base address. There then follow a sequence of field definitions that start with field name, then a start bit position and length (in bits) followed by the typename used to represent values for the field. These tyope names are expected to be user defined `enum` defintions. 
+
+The generator tool converts all register and field names into uppercase, this makes it easy to edit and type these definitions without having to use uppercase in the defintion. The regular expression defintion for the regdef syntax is defined in [`Constants.cs`](https://github.com/Steadsoft/Endpoint/blob/main/Steadsoft.Spitfire.STM32MP153/Statics/Constants.cs) like this
+
+```cs
+
+        // language=regex
+        public const string identifier = @"(([a-zA-Z][a-zA-Z\d]*))";
+        // language=regex
+        public const string hexnumber = @"0x[0-9A-Fa-f]+";
+        // language=regex
+        public const string s = @"\s*";
+        // language=regex
+        public const string lpar = @"\(";
+        // language=regex
+        public const string rpar = @"\)";
+        // language=regex
+        public const string colon = @":";
+        // language=regex
+        public const string commalist = @"\d+(\s*,\s*\d+)+";
+        // language=regex
+        public const string semicolon = @";";
+        // language=regex
+        public const string dot = @"\.";
+        // language=regex
+        public const string Syntax = $@"{identifier}{s}{lpar}{s}{hexnumber}{s}{rpar}{s}{colon}{s}({identifier}({dot}{identifier})?{s}{lpar}{s}{commalist}{s}{rpar}{s}{identifier}{s}{semicolon}{s})+";
+```
+
 The generator logic is part of the class library and will in due course, be managed by a Visual Studio based generator.
 
 
